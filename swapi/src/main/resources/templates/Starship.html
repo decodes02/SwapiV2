@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Star Wars Starships</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/characters">Characters</a>
+  <a href="/films">Films</a>
+  <a href="/starships">Starships</a>
+</nav>
+<h1>Star Wars Starships</h1>
+<form method="get" action="/starships">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <input type="text" name="name" placeholder="Search by name" style="padding: 10px; width: 300px; border: 1px solid #ccc; border-radius: 4px;">
+    <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Search</button>
+  </div>
+</form>
+<div class="starship-container">
+  <div th:each="starship : ${starships.results}" class="starship-card">
+    <div style="display: flex; align-items: center;">
+      <div>
+        <h3 th:text="${starship.name}"></h3>
+        <div th:if="${!#strings.isEmpty(name)}">
+          <p><strong>Model:</strong> <span th:text="${starship.model}"></span></p>
+          <p><strong>Manufacturer:</strong> <span th:text="${starship.manufacturer}"></span></p>
+          <p><strong>Class:</strong> <span th:text="${starship.starshipClass}"></span></p>
+          <p><strong>Crew:</strong> <span th:text="${starship.crew}"></span></p>
+        </div>
+      </div>
+      <img th:src="${starship.imageUrl}" alt="Starship Image" style="margin-left: 20px; width: 150px; border-radius: 8px;" />
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

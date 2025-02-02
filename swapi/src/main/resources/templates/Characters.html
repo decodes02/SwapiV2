@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Star Wars Characters</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/characters">Characters</a>
+  <a href="/films">Films</a>
+  <a href="/starships">Starships</a>
+</nav>
+
+
+<h1>Star Wars Characters</h1>
+<form method="get" action="/characters">
+  <div class="form-container">
+    <input type="text" name="name" placeholder="Search by name" class="search-box">
+    <button type="submit" class="search-button">Search</button>
+  </div>
+</form>
+<div class="character-container">
+  <div th:each="character : ${characters}" class="character-card">
+    <div style="display: flex; align-items: center;">
+      <div>
+        <h3 th:text="${character.name}"></h3>
+        <div th:if="${#strings.isEmpty(name)}">
+          <!-- Only name displayed when no search -->
+        </div>
+        <div th:if="${!#strings.isEmpty(name)}">
+          <p><strong>Height:</strong> <span th:text="${character.height}"></span> cm</p>
+          <p><strong>Mass:</strong> <span th:text="${character.mass}"></span> kg</p>
+          <p><strong>Hair Color:</strong> <span th:text="${character.hairColor}"></span></p>
+          <p><strong>Skin Color:</strong> <span th:text="${character.skinColor}"></span></p>
+          <p><strong>Eye Color:</strong> <span th:text="${character.eyeColor}"></span></p>
+          <p><strong>Birth Year:</strong> <span th:text="${character.birthYear}"></span></p>
+          <p><strong>Gender:</strong> <span th:text="${character.gender}"></span></p>
+        </div>
+      </div>
+      <img th:src="${character.imageUrl}" alt="Character Image" style="display: flex; margin-left: auto; margin-right: auto;
+                          width: 100%; height: 100%; object-fit:contain" />
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
